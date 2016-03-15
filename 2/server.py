@@ -10,11 +10,9 @@ else:
 class HelloHandler(BaseRequestHandler):
 
     def handle(self):
-        print('New connection')
         self.request.send(b'Hello!\n')
 
 
 port = int(os.environ.get('SERVER_PORT'))
-print('Starting server on port', port)
 server = TCPServer(('', port), HelloHandler)
 server.serve_forever()
