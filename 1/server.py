@@ -1,8 +1,7 @@
+from __future__ import print_function
 import os
 import sys
-
 if sys.version_info[0] == 2:
-    from __future__ import print_function
     from SocketServer import BaseRequestHandler, TCPServer
 else:
     from socketserver import BaseRequestHandler, TCPServer
