@@ -1,8 +1,14 @@
-import socketserver
 import os
+import sys
+
+if sys.version_info[0] == 2:
+    from __future__ import print_function
+    from SocketServer import BaseRequestHandler, TCPServer
+else:
+    from socketserver import BaseRequestHandler, TCPServer
 
 
-class HelloHandler(socketserver.BaseRequestHandler):
+class HelloHandler(BaseRequestHandler):
 
     def handle(self):
         print('New connection')
@@ -11,5 +17,5 @@ class HelloHandler(socketserver.BaseRequestHandler):
 
 port = int(os.environ.get('SERVER_PORT'))
 print('Starting server on port', port)
-server = socketserver.TCPServer(('', port), HelloHandler)
+server = TCPServer(('', port), HelloHandler)
 server.serve_forever()
