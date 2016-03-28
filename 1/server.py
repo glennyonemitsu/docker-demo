@@ -1,17 +1,16 @@
-from __future__ import print_function
-import os
 import sys
 if sys.version_info[0] == 2:
-    from SocketServer import BaseRequestHandler, TCPServer
+    from BaseHTTPServer import HTTPServer, BaseHTTPRequestHandler
 else:
-    from socketserver import BaseRequestHandler, TCPServer
+    from http.server import HTTPServer, BaseHTTPRequestHandler
 
 
-class HelloHandler(BaseRequestHandler):
+class HelloWorldHandler(BaseHTTPRequestHandler):
+    def do_GET(self):
+        self.send_response(200, 'OK')
+        self.end_headers()
+        self.wfile.write(b'Hello, World!')
 
-    def handle(self):
-        self.request.send(b'Hello!\n')
 
-
-server = TCPServer(('', 9999), HelloHandler)
+server = HTTPServer(('', 9999), HelloWorldHandler)
 server.serve_forever()
