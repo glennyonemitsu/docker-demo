@@ -1,4 +1,5 @@
 import os
+import signal
 import sys
 if sys.version_info[0] == 2:
     from BaseHTTPServer import HTTPServer, BaseHTTPRequestHandler
@@ -6,6 +7,7 @@ else:
     from http.server import HTTPServer, BaseHTTPRequestHandler
 
 
+signal.signal(signal.SIGINT, lambda x, y: sys.exit(0))
 port = int(os.environ.get('SERVER_PORT'))
 
 
