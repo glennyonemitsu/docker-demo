@@ -5,4 +5,4 @@ ENV SERVER_PORT 9999
 
 ADD server.py /app/server.py
 
-CMD python /app/server.py
+ENTRYPOINT python /app/server.py
